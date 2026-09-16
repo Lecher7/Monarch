@@ -1,0 +1,110 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="OLDSite.SiteMaster" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head id="Head1" runat="server">
+    <%--This site uses the following SQL Server objects:--%>
+    <%--  Tables: tmpDropdowns, tmpMessaged, tmpUserMatch, tmpUsers, tmpViewed, tmpWinked, tmpFaved --%>
+    <%--  Views: vw_tmpUsers--%>
+    <%--  SProcs: sp_RegisterUser, sp_Search, sp_MessageUser, sp_MutualWink, sp_MutualFavorite
+                  sp_UserTemplate, sp_MailSent, sp_MailReceived, sp_WinkSent, sp_WinkReceived  
+                  sp_MailReceivedSummary, sp_WinkReceivedSummary, sp_ViewedByOthers, sp_ViewedByMe
+                  sp_FavedByOthers, sp_FavedByMe, sp_CommonInterests, sp_FindLocationsInRange 
+                  sp_WritePhotoInfo --%>
+    <%--  Functions: CSVtoTable --%>
+
+
+    <meta charset="utf-8" />
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <asp:PlaceHolder runat="server">     
+          <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>  
+ <!--   <webopt:BundleReference runat="server" Path="~/Styles" />  -->
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="~/Styles/prettify.css" rel="stylesheet" type="text/css" />
+        <link href="~/Styles/jquery.multiselect.css" rel="stylesheet" type="text/css" />
+        <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+        <meta name="viewport" content="width=device-width" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+    <form id="Form1" runat="server">
+
+        <asp:ScriptManager ID="MyScriptMgr" runat="server"></asp:ScriptManager>
+
+    <header>
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1>
+                    <a id="A1" runat="server" href="~/">your logo here</a>
+                </h1>
+            </div>
+            <div class="loginmenu">
+                <section id="login" style="text-align:right">
+                    <asp:LoginView ID="LoginView1" runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" 
+                                IncludeStyleBlock="False" align="right" Orientation="Horizontal" 
+                                BackColor="#CC3300">
+                                <Items> 
+                                    <asp:MenuItem NavigateUrl="~/Account/Register.aspx" Text="Register" />
+                                    <asp:MenuItem NavigateUrl="~/Login.aspx" Text="Log in"/>
+                                </Items>
+                            </asp:Menu>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <div Class="menu">
+                            <p>
+                            <asp:Table ID="Table1" runat="server" CssClass="menu" CellPadding="2" CellSpacing="2">
+                              <asp:TableRow Height="20">
+                                <asp:TableCell Width="60" BorderWidth="1" BorderColor="White" BackColor="#6699ff" HorizontalAlign="Center">
+                                  <a id="A2" runat="server" class="menu" href="~/Account/Manage.aspx" title="Manage your account">
+                                    <asp:LoginName ID="LoginName1" runat="server" CssClass="username" /></a>
+                                </asp:TableCell>
+                                  <asp:TableCell Width="3"></asp:TableCell>
+                                <asp:TableCell Width="60" BorderWidth="1" BorderColor="White" BackColor="#6699ff" HorizontalAlign="Center">
+                                  <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" class="menu" />
+                                </asp:TableCell>
+                              </asp:TableRow>
+                            </asp:Table>
+                            </p>
+                            </div>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </section>
+            </div>
+            <div class="clear hideSkiplink" id="MainMenu">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" 
+                    IncludeStyleBlock="False" Orientation="Horizontal" 
+                    BackColor="#CC3300">
+                    <Items> 
+                        <asp:MenuItem NavigateUrl="~/OLDMain.aspx" Text="Home" Selectable="true" />
+                        <asp:MenuItem NavigateUrl="~/Manage.aspx" Text="Manage"/>
+                        <asp:MenuItem NavigateUrl="~/frmMessages.aspx" Text="Mailbox"/>
+                        <asp:MenuItem NavigateUrl="~/frmViewed.aspx" Text="Viewed Me"/>
+                        <asp:MenuItem NavigateUrl="~/frmFavorites.aspx" Text="Favorites"/>
+                        <asp:MenuItem NavigateUrl="~/Help.aspx" Text="Help"/>
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>        
+    </div>
+    </header>
+    <div id="body">
+        <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+        <section class="content-wrapper main-content clear-fix">
+            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+        </section>
+    </div>
+    <footer>
+        <div class="footer">
+            <div class="float-left">
+                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+            </div>
+        </div>
+    </footer>
+    </form>
+</body>
+</html>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="ApplicationServices-Web.config Connection String" description="ApplicationServices Connection String used in web.config by the application to access the database." defaultvalue="data source=old-tyme\monarch;Initial Catalog=Monarch;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Monarch\\Monarch\\Monarch\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ApplicationServices']/@connectionString" />
+  </parameter>
+  <parameter name="OLDSiteConn-Web.config Connection String" description="OLDSiteConn Connection String used in web.config by the application to access the database." defaultvalue="Data Source=old-tyme\monarch;Initial Catalog=Monarch;Uid=ExternalUsers;Pwd=SQLPassword1" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Monarch\\Monarch\\Monarch\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='OLDSiteConn']/@connectionString" />
+  </parameter>
+</parameters>
